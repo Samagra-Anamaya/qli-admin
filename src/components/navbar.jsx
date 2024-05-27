@@ -2,6 +2,7 @@ import * as React from 'react';
 import {Box,Toolbar,IconButton,MenuItem,Menu,Typography, AppBar} from '@mui/material';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useNavigate} from 'react-router-dom';
+import NavbarImage from '../assets/navbar.png'
 
 export default function Navbar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -23,12 +24,12 @@ export default function Navbar() {
   }
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+    <Box sx={{ height:"120px"}}>
+      <AppBar position="static" style={{height:"100%",backgroundImage: `url(${NavbarImage})`,
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    backgroundPosition: "center",boxShadow:"none"}}>
         <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-        QLI Admin
-          </Typography>
             <div>
               <IconButton
                 size="large"

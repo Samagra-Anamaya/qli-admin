@@ -11,6 +11,7 @@ import {
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
+import LoginBackgroundImage from '../../assets/login_pic.png'
 
 function Login() {
   const defaultTheme = createTheme();
@@ -59,9 +60,9 @@ function Login() {
           item
           xs={false}
           sm={6}
-          md={8}
+          md={7.7}
           sx={{
-            backgroundImage: "url(loginBg.avif)",
+            backgroundImage: `url(${LoginBackgroundImage})`,
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"
@@ -71,22 +72,32 @@ function Login() {
             backgroundPosition: "center",
           }}
         />
-        <Grid item xs={12} sm={6} md={4} component={Paper} elevation={6} square>
+        <Grid item xs={12} sm={6} md={4.3} component={Paper} elevation={3} square>
           <Box
             sx={{
-              my: 8,
-              mx: 4,
+              mx: 8,
+              height:"100%",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
+              justifyContent:"center",
+              gap:"48px"
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-              <LockOutlinedIcon />
+            <Box sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent:"center",
+              gap:"16px"
+            }}>
+            <Avatar sx={{ p:"8px", bgcolor: "#878586" }}>
+              <LockOutlinedIcon fontSize="large"/>
             </Avatar>
-            <Typography component="h1" variant="h5">
+            <Typography component="h4" variant="h4" sx={{fontWeight:"600"}}>
               Sign in
             </Typography>
+            </Box>
             <Box
               component="form"
               noValidate
@@ -101,7 +112,9 @@ function Login() {
                 label="User ID"
                 name="userId"
                 autoComplete="userId"
-                autoFocus
+                sx={{bgcolor:"#F6F6F6",'&:active':{
+                  bgcolor:'#F6F6F6',color:"#878586",borderColor:"#878586"
+                } }}
               />
               <TextField
                 margin="normal"
@@ -112,14 +125,20 @@ function Login() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                sx={{bgcolor:"#F6F6F6"}}
               />
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                size="large"
+                sx={{ my:8,textTransform:"none", bgcolor:"#02816A", '&:hover':{
+                  bgcolor:'#307360'
+                },'&:active':{
+                  bgcolor:'#307360'
+                }  }}
               >
-                Log In
+                <span style={{fontWeight:"500", fontSize:"18px"}}>Log In</span>
               </Button>
             </Box>
           </Box>
