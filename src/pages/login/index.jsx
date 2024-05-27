@@ -60,19 +60,26 @@ function Login() {
           item
           xs={false}
           sm={6}
-          md={7.7}
-          sx={{
-            backgroundImage: `url(${LoginBackgroundImage})`,
-            backgroundRepeat: "no-repeat",
-            backgroundColor: (t) =>
-              t.palette.mode === "light"
-                ? t.palette.grey[50]
-                : t.palette.grey[900],
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        />
-        <Grid item xs={12} sm={6} md={4.3} component={Paper} elevation={3} square>
+          md={7.6}
+          // sx={{
+          //   backgroundImage: `url(${LoginBackgroundImage})`,
+          //   backgroundRepeat: "no-repeat",
+          //   backgroundColor: (t) =>
+          //     t.palette.mode === "light"
+          //       ? t.palette.grey[50]
+          //       : t.palette.grey[900],
+          //   // backgroundSize: "contain",
+          //   backgroundPosition: "center",
+          //   width:"100%",
+          //   height:"100%"
+          // }}
+        >
+          <img src={LoginBackgroundImage} width={"100%"} height={"100%"}/>
+        </Grid>
+        <Grid item xs={12} 
+        sm={6} 
+        md={4.4} 
+        component={Paper} elevation={3} square>
           <Box
             sx={{
               mx: 8,
@@ -81,7 +88,8 @@ function Login() {
               flexDirection: "column",
               alignItems: "center",
               justifyContent:"center",
-              gap:"48px"
+              gap:"48px",
+              my:1
             }}
           >
             <Box sx={{
