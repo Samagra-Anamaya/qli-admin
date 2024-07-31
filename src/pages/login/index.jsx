@@ -11,7 +11,7 @@ import {
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
-import LoginBackgroundImage from '../../assets/login_pic.png'
+import LoginBackgroundImage from "../../assets/track_login_pic.png";
 
 function Login() {
   const defaultTheme = createTheme();
@@ -62,49 +62,60 @@ function Login() {
           sm={6}
           md={7.6}
           // sx={{
-          //   backgroundImage: `url(${LoginBackgroundImage})`,
-          //   backgroundRepeat: "no-repeat",
-          //   backgroundColor: (t) =>
-          //     t.palette.mode === "light"
-          //       ? t.palette.grey[50]
-          //       : t.palette.grey[900],
-          //   // backgroundSize: "contain",
-          //   backgroundPosition: "center",
-          //   width:"100%",
-          //   height:"100%"
+          // backgroundImage: `url(${LoginBackgroundImage})`,
+          // backgroundRepeat: "no-repeat",
+          // backgroundColor: (t) =>
+          //   t.palette.mode === "light"
+          //     ? t.palette.grey[50]
+          //     : t.palette.grey[900],
+          // // backgroundSize: "contain",
+          // backgroundPosition: "center",
+          // width:"100%",
+          // height: "100vh",
           // }}
         >
-          <img src={LoginBackgroundImage} width={"100%"} height={"100%"}/>
+          <img src={LoginBackgroundImage} width={"100%"} height={"100%"} />
         </Grid>
-        <Grid item xs={12} 
-        sm={6} 
-        md={4.4} 
-        component={Paper} elevation={3} square>
+        <Grid
+          item
+          xs={12}
+          sm={6}
+          md={4.4}
+          component={Paper}
+          elevation={3}
+          square
+        >
           <Box
             sx={{
               mx: 8,
-              height:"100%",
+              height: "100%",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              justifyContent:"center",
-              gap:"48px",
-              my:1
+              justifyContent: "center",
+              gap: "48px",
+              my: 1,
             }}
           >
-            <Box sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent:"center",
-              gap:"16px"
-            }}>
-            <Avatar sx={{ p:"8px", bgcolor: "#878586" }}>
-              <LockOutlinedIcon fontSize="large"/>
-            </Avatar>
-            <Typography component="h4" variant="h4" sx={{fontWeight:"600"}}>
-              Sign in
-            </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "16px",
+              }}
+            >
+              <Avatar sx={{ p: "8px", bgcolor: "#878586" }}>
+                <LockOutlinedIcon fontSize="large" />
+              </Avatar>
+              <Typography
+                component="h4"
+                variant="h4"
+                sx={{ fontWeight: "600" }}
+              >
+                Sign in
+              </Typography>
             </Box>
             <Box
               component="form"
@@ -120,9 +131,14 @@ function Login() {
                 label="User ID"
                 name="userId"
                 autoComplete="userId"
-                sx={{bgcolor:"#F6F6F6",'&:active':{
-                  bgcolor:'#F6F6F6',color:"#878586",borderColor:"#878586"
-                } }}
+                sx={{
+                  bgcolor: "#F6F6F6",
+                  "&:active": {
+                    bgcolor: "#F6F6F6",
+                    color: "#878586",
+                    borderColor: "#878586",
+                  },
+                }}
               />
               <TextField
                 margin="normal"
@@ -133,20 +149,35 @@ function Login() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                sx={{bgcolor:"#F6F6F6"}}
+                sx={{ bgcolor: "#F6F6F6" }}
               />
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                size="large"
-                sx={{ my:8,textTransform:"none", bgcolor:"#02816A", '&:hover':{
-                  bgcolor:'#307360'
-                },'&:active':{
-                  bgcolor:'#307360'
-                }  }}
+                size="medium"
+                sx={{
+                  my: 8,
+                  textTransform: "none",
+                  bgcolor: "#C5C4C5",
+                  "&:hover": {
+                    bgcolor: "#B0AFB0",
+                  },
+                  "&:active": {
+                    bgcolor: "#9B9A9B",
+                  },
+                  // bgcolor: "#02816A",
+                  // "&:hover": {
+                  //   bgcolor: "#307360",
+                  // },
+                  // "&:active": {
+                  //   bgcolor: "#307360",
+                  // },
+                }}
               >
-                <span style={{fontWeight:"500", fontSize:"18px"}}>Log In</span>
+                <span style={{ fontWeight: "600", fontSize: "18px" }}>
+                  Log In
+                </span>
               </Button>
             </Box>
           </Box>
