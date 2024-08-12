@@ -1,12 +1,10 @@
-FROM node:18-alpine
-
+FROM node:18-alpine as BUILD_IMAGE
 WORKDIR /app
 
 COPY package.json .
+COPY vite.config.js .
 
-RUN npm install
-
-RUN npm i -g serve
+RUN npm install --legacy-peer-deps
 
 ARG VITE_BACKEND_SERVICE_URL
 
@@ -16,6 +14,6 @@ COPY . .
 
 RUN npm run build
 
-EXPOSE 3000
+EXPOSE 5173
 
-CMD [ "serve", "-s", "dist" ]
+CMD ["npm", "run", "preview"]
