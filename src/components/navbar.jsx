@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { useNavigate } from "react-router-dom";
-import NavbarImage from "../assets/track_navbar.png";
+import NavbarImage from "../assets/track_navbar.jpeg";
 
 export default function Navbar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -32,7 +32,7 @@ export default function Navbar() {
   };
 
   return (
-    <Box sx={{ height: "120px" }}>
+    <Box sx={{ height: "300px" }}>
       <AppBar
         position="static"
         style={{
