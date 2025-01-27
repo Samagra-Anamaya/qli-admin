@@ -9,6 +9,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import { Container, Grid } from "@mui/material";
+import NavbarImage from "../../assets/track_navbar.png";
 
 function Home() {
   const [data, setData] = useState([]);
@@ -30,8 +31,7 @@ function Home() {
         return response.json();
       })
       .then((data) => {
-        const responseData = data.data;
-        setData(responseData);
+        setData(data);
       })
       .catch((error) => {
         console.log("error", error.message);
@@ -55,24 +55,70 @@ function Home() {
               alignItems={"center"}
               flexDirection={"column"}
               rowGap={3}
-              width={"50%"}
+              width={"80%"}
               minWidth={"300px"}
             >
-              {/* <Box px={11} py={1} sx={{ bgcolor: "#C5C4C5" }}>
-                <Typography
-                  variant="h6"
-                  sx={{ fontWeight: "500", color: "#ffffff" }}
+              {data?.departmentData?.logo && (
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "70px",
+                    right: "50px",
+                    textAlign: "center",
+                    maxWidth: "200px",
+                  }}
                 >
-                  Indicator Dashboards
-                </Typography>
-              </Box> */}
+                  <img
+                    src={data?.departmentData?.logo}
+                    alt=""
+                    width={"100px"}
+                  />
+                  <p
+                    style={{
+                      margin: 0,
+                      fontSize: "14px",
+                      fontFamily: "Calibri",
+                    }}
+                  >
+                    {data?.departmentData?.name
+                      ? data?.departmentData?.name
+                      : "Government of Odisha"}
+                  </p>
+                </div>
+              )}
+              <img
+                src={NavbarImage}
+                alt="navbar-logo"
+                width={"600px"}
+                height={"300px"}
+              />
+              {data?.departmentData?.name && (
+                <Box px={11} py={1} sx={{ width: "100%", textAlign: "center" }}>
+                  <Typography
+                    variant="h3"
+                    sx={{ fontWeight: "600", color: "#545454" }}
+                  >
+                    {data.departmentData.name}
+                  </Typography>
+                </Box>
+              )}
               <nav style={{ width: "100%" }}>
                 <List marker="circle">
-                  <Box display={"flex"} flexDirection={"column"} rowGap={2} width={"100%"}>
-                    {data?.map((item, i) => {
+                  <Box
+                    display={"flex"}
+                    flexWrap={"wrap"}
+                    justifyContent={"center"}
+                    gap={3}
+                    width={"100%"}
+                  >
+                    {data?.data?.map((item, i) => {
                       return (
                         <ListItem
-                          sx={{width: "100%"}}
+                          sx={{
+                            width: "30%", // Max width to ensure only 3 items in a row
+                            minWidth: "250px", // Ensures a minimum size
+                            maxWidth: "300px", // Set a maximum width
+                          }}
                           key={i}
                           disablePadding
                           onClick={() => {
@@ -82,8 +128,51 @@ function Home() {
                           {/* <ListItemIcon>
                             <FormatListBulletedIcon fontSize="medium" />
                           </ListItemIcon> */}
-                          <ListItemButton sx={{ bgcolor: "#f5bc96", borderRadius: '10px', width: '100%', ":hover": { bgcolor: "#f5bc96" } }}>
-                            <ListItemText primary={item.dashboardName} />
+                          <ListItemButton
+                            sx={{
+                              background:
+                                "linear-gradient(90deg, rgba(250,171,62,1) 35%, rgba(254,150,74,1) 100%)",
+                              borderRadius: "10px",
+                              width: "100%",
+                              height: "100%",
+                            }}
+                          >
+                            <ListItemText
+                              primary={
+                                item.dashboardName.includes(":") ? (
+                                  <>
+                                    <span
+                                      style={{
+                                        fontWeight: "bold",
+                                        fontSize: "24px",
+                                      }}
+                                    >
+                                      {item.dashboardName.split(":")[0]}:
+                                    </span>{" "}
+                                    <span style={{ fontSize: "20px" }}>
+                                      {item.dashboardName.split(":")[1]}
+                                    </span>
+                                  </>
+                                ) : (
+                                  <span
+                                    style={{
+                                      fontWeight: "bold",
+                                      fontSize: "24px",
+                                    }}
+                                  >
+                                    {item.dashboardName}
+                                  </span>
+                                )
+                              }
+                              sx={{
+                                height: "100%",
+                                color: "white",
+                                textAlign: "center",
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                              }}
+                            />
                           </ListItemButton>
                         </ListItem>
                       );

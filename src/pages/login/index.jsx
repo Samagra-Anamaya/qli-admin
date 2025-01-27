@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Avatar,
   Button,
@@ -7,12 +7,13 @@ import {
   Typography,
   Grid,
   Paper,
-} from '@mui/material';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+  createTheme,
+  ThemeProvider,
+} from "@mui/material";
 // import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useNavigate } from 'react-router-dom';
-import LoginBackgroundImage from '../../assets/track_login_pic.png';
-import Logo from '../../assets/logo.png';
+import { useNavigate } from "react-router-dom";
+import LoginBackgroundImage from "../../assets/track_login_pic.png";
+import { LockRounded } from "@mui/icons-material";
 
 function Login() {
   // const defaultTheme = createTheme();
@@ -25,172 +26,195 @@ function Login() {
     const data = new FormData(event.currentTarget);
 
     fetch(`${BASE_URL}/ste/authenticate`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        username: data.get('userId'),
-        password: data.get('password'),
+        username: data.get("userId"),
+        password: data.get("password"),
       }),
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error('Invalid username or password');
+          throw new Error("Invalid username or password");
         }
         return response.json();
       })
       .then((data) => {
-        if (data.status === 'success') {
-          localStorage.setItem('token', data.token);
+        if (data.status === "success") {
+          localStorage.setItem("token", data.token);
           const expiration = new Date();
           expiration.setHours(expiration.getHours() + 3);
-          localStorage.setItem('expiration', expiration.toISOString());
-          navigate('/dashboard');
+          localStorage.setItem("expiration", expiration.toISOString());
+          navigate("/dashboard");
         }
       })
       .catch((error) => {
-        console.log('error', error.message);
+        console.log("error", error.message);
       });
   };
 
   return (
-    // <ThemeProvider theme={defaultTheme}>
-    <Grid container component="main" sx={{ height: '100vh' }}>
-      <Grid
-        item
-        xs={false}
-        sm={6}
-        md={7.6}
-        sx={{ height: '100vh' }}
-        // sx={{
-        // backgroundImage: `url(${LoginBackgroundImage})`,
-        // backgroundRepeat: "no-repeat",
-        // backgroundColor: (t) =>
-        //   t.palette.mode === "light"
-        //     ? t.palette.grey[50]
-        //     : t.palette.grey[900],
-        // // backgroundSize: "contain",
-        // backgroundPosition: "center",
-        // width:"100%",
-        // height: "100vh",
-        // }}
-      >
-        <img src={LoginBackgroundImage} width={'100%'} height={'100%'} />
-      </Grid>
-      <Grid
-        item
-        xs={12}
-        sm={6}
-        md={4.4}
-        component={Paper}
-        elevation={3}
-        square
-        sx={{ height: '100vh' }}>
-        <div style={{ textAlign: 'right' }}>
-          <img src={Logo} width={'120px'} height={'100px'} />
-        </div>
-        <Box
-          sx={{
-            mx: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '48px',
-            my: 1,
-          }}>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '16px',
-              position: 'relative',
-            }}>
-            <Avatar sx={{ p: '8px', bgcolor: '#e8692d' }}>
-              <LockOutlinedIcon fontSize="large" />
-            </Avatar>
-            <Typography component="h4" variant="h4" sx={{ fontWeight: '600' }}>
-              Sign in
-            </Typography>
-          </Box>
-          <Box
-            component="form"
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{ mt: 1 }}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="userId"
-              label="User ID"
-              name="userId"
-              autoComplete="userId"
-              sx={{
-                bgcolor: '#F6F6F6',
-                '&:active': {
-                  bgcolor: '#F6F6F6',
-                  color: '#e8692d',
-                  borderColor: '#e8692d',
-                },
-              }}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              sx={{ bgcolor: '#F6F6F6' }}
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              size="medium"
-              sx={{
-                my: 8,
-                textTransform: 'none',
-                bgcolor: '#e8692d',
-                '&:hover': {
-                  bgcolor: '#e8692d',
-                },
-                // "&:active": {
-                //   bgcolor: "#9B9A9B",
-                // },
-                // bgcolor: "#02816A",
-                // "&:hover": {
-                //   bgcolor: "#307360",
-                // },
-                // "&:active": {
-                //   bgcolor: "#307360",
-                // },
-              }}>
-              <span style={{ fontWeight: '600', fontSize: '18px' }}>
-                Log In
-              </span>
-            </Button>
-          </Box>
+    <ThemeProvider
+      theme={createTheme({
+        typography: {
+          fontFamily: 'Fira Sans',
+        },
+      })}
+    >
+      <Grid container component="main" sx={{ height: "100vh" }}>
+        <Grid
+          item
+          xs={false}
+          sm={6}
+          md={7.6}
+          sx={{ height: "100vh", position: "relative" }}
+          // sx={{
+          // backgroundImage: `url(${LoginBackgroundImage})`,
+          // backgroundRepeat: "no-repeat",
+          // backgroundColor: (t) =>
+          //   t.palette.mode === "light"
+          //     ? t.palette.grey[50]
+          //     : t.palette.grey[900],
+          // // backgroundSize: "contain",
+          // backgroundPosition: "center",
+          // width:"100%",
+          // height: "100vh",
+          // }}
+        >
+          <img src={LoginBackgroundImage} width={"100%"} height={"90%"} />
           <div
             style={{
-              fontStyle: 'italic',
-              fontSize: '11px',
-              position: 'absolute',
+              fontSize: "12px",
+              position: "absolute",
               bottom: 10,
               right: 10,
-            }}>
-            Enabled by Electronics & Information Technology Department
+            }}
+          >
+            Website hosted and maintained by OCAC
           </div>
-        </Box>
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          sm={6}
+          md={4.4}
+          component={Paper}
+          elevation={3}
+          square
+          sx={{
+            height: "100vh",
+            background:
+              "linear-gradient(180deg, rgba(250,171,62,1) 35%, rgba(254,150,74,1) 100%)",
+          }}
+        >
+          <Box
+            sx={{
+              mx: 8,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "48px",
+              my: 1,
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "16px",
+                marginTop: "35%",
+              }}
+            >
+              <Avatar sx={{ p: "8px", bgcolor: "white", width: "50px", height: "50px" }}>
+                <LockRounded sx={{ color: "#fba442", fontSize: "50px" }} />
+              </Avatar>
+              <Typography
+                variant="h4"
+                sx={{ fontWeight: "600", color: "white" }}
+              >
+                Sign in
+              </Typography>
+            </Box>
+            <Typography variant="h1" sx={{ fontWeight: "600", color: "white" }}>
+              Welcome
+            </Typography>
+            <Box
+              component="form"
+              noValidate
+              onSubmit={handleSubmit}
+              sx={{ mt: 1 }}
+            >
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="userId"
+                label="User ID"
+                name="userId"
+                autoComplete="userId"
+                sx={{
+                  bgcolor: "#F6F6F6",
+                  "&:active": {
+                    bgcolor: "#F6F6F6",
+                    color: "#e8692d",
+                    borderColor: "#e8692d",
+                  },
+                  borderRadius: "10px",
+                }}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                sx={{
+                  bgcolor: "#F6F6F6",
+                  borderRadius: "10px",
+                }}
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                size="medium"
+                sx={{
+                  my: 8,
+                  textTransform: "none",
+                  bgcolor: "#545454",
+                  "&:hover": {
+                    bgcolor: "#545454",
+                  },
+                  borderRadius: "10px",
+                  // "&:active": {
+                  //   bgcolor: "#9B9A9B",
+                  // },
+                  // bgcolor: "#02816A",
+                  // "&:hover": {
+                  //   bgcolor: "#307360",
+                  // },
+                  // "&:active": {
+                  //   bgcolor: "#307360",
+                  // },
+                }}
+              >
+                <span style={{ fontWeight: "600", fontSize: "18px" }}>
+                  Log In
+                </span>
+              </Button>
+            </Box>
+          </Box>
+        </Grid>
       </Grid>
-    </Grid>
-    // </ThemeProvider>
+    </ThemeProvider>
   );
 }
 
